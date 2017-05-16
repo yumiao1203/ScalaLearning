@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Data/Data.iml" filepath="$PROJECT_DIR$/.idea/modules/Data/Data.iml" group="Data" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DataStr.iml" filepath="$PROJECT_DIR$/.idea/modules/DataStr.iml" group="DataStr" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DataStr/DataStr_main.iml" filepath="$PROJECT_DIR$/.idea/modules/DataStr/DataStr_main.iml" group="DataStr" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DataStr/DataStr_test.iml" filepath="$PROJECT_DIR$/.idea/modules/DataStr/DataStr_test.iml" group="DataStr" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ScalaFundamental.iml" filepath="$PROJECT_DIR$/.idea/modules/ScalaFundamental.iml" group="ScalaFundamental" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ScalaFundamental/ScalaFundamental_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ScalaFundamental/ScalaFundamental_main.iml" group="ScalaFundamental" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ScalaFundamental/ScalaFundamental_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ScalaFundamental/ScalaFundamental_test.iml" group="ScalaFundamental" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ScalaLearning.iml" filepath="$PROJECT_DIR$/.idea/modules/ScalaLearning.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ScalaLearning_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ScalaLearning_main.iml" group="ScalaLearning" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ScalaLearning_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ScalaLearning_test.iml" group="ScalaLearning" />
+    </modules>
+  </component>
+</project>

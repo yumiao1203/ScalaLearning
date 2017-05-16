@@ -1,0 +1,5 @@
+rootProject.name = 'ScalaLearning'
+include 'DataStr'
+include 'Data'
+include 'ScalaFundamental'
+

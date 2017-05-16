@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="Data_main" target="1.8" />
+      <module name="Data_test" target="1.8" />
+      <module name="DataStr_main" target="1.5" />
+      <module name="DataStr_test" target="1.5" />
+      <module name="ScalaFundamental_main" target="1.5" />
+      <module name="ScalaFundamental_test" target="1.5" />
+      <module name="ScalaLearning_main" target="1.5" />
+      <module name="ScalaLearning_test" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
