@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jpmml:jpmml-converter:1.2.3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/gradle/caches/modules-2/files-2.1/org.jpmml/jpmml-converter/1.2.3/541d8e63a19a6220d682ec521896b42380bb0567/jpmml-converter-1.2.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/gradle/caches/modules-2/files-2.1/org.jpmml/jpmml-converter/1.2.3/ac0fda111781727dbfd9d31afb3a7b181421acd5/jpmml-converter-1.2.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
