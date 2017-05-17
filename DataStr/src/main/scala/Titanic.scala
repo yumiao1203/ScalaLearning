@@ -60,5 +60,4 @@ object Titanic extends App{
   val clearNum = clearData.count()
   println(clearNum)
   clearData.printSchema()
-
 }
