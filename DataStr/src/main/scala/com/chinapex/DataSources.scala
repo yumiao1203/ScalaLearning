@@ -1,10 +1,12 @@
+package com.chinapex
+
 /**
   * Created by josh on 17-5-17.
   */
 
 
 import org.apache.spark.SparkContext
-import org.apache.spark.sql.{DataFrame, Row, SQLContext, SparkSession}
+import org.apache.spark.sql.Row
 import org.apache.spark.sql.types._
 
 object DataSources extends App{

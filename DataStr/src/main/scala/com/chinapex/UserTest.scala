@@ -1,6 +1,9 @@
+package com.chinapex
+
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.Row
 import org.apache.spark.sql.types._
+
 
 /**
   * Created by josh on 17-5-17.
@@ -13,9 +16,8 @@ object UserTest extends App{
     .getOrCreate
   val filePath = "/home/josh/Downloads/个人征信/train/user_info_train.txt" //Current fold file
   val userRDD = spark.sparkContext.textFile(filePath)
-  val schemaString = "用户id 性别 职业 教育程度 婚姻状况 户口类型"
-  val fields = schemaString.split(" ")
-    .map(fieldName => StructField(fieldName, StringType, nullable = true))
+  val schemaString = "用户id 性别 职业 教育程度 婚姻状态 户口类型"
+  val fields = schemaString.split(" ").map(mapStructField)
   val schema = StructType(fields)
   val rowRDD1 = userRDD.map(_.split(","))
     .map(attributes => Row(attributes(0), attributes(1), attributes(2), attributes(3),
