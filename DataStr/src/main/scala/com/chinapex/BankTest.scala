@@ -17,12 +17,12 @@ object BankTest {
     val schemaString = "用户id 时间戳 交易类型 交易金额 工资收入标记"
 //通过columnname转换StructField
     def mapStructField(colName:String): StructField ={
-      if (colName == "用户id"){
-        StructField(colName, StringType, true)
+      if(colName == "用户id"){
+        StructField(colName, IntegerType, true)
       }else if(colName == "时间戳"){
         StructField(colName, LongType, true)
       }else if(colName == "交易金额") {
-        StructField(colName, LongType, true)
+        StructField(colName, DoubleType, true)
       }else if(colName == "工资收入标记"||colName == "性别"||colName == "交易类型"){
         StructField(colName, BooleanType, true)
       }else{
