@@ -1,45 +1,65 @@
 package com.chinapex.process
 
-
-import org.apache.spark.sql.{DataFrame, Row, SparkSession}
+import org.apache.spark.sql.SparkSession
+import com.chinapex._
 
 /**
   * Created by josh on 17-5-18.
   */
 object Test extends App {
-  val spark = SparkSession.builder
+
+  val spark = SparkSession
+    .builder()
+    .appName("Spark SQL basic example")
     .master("local")
-    .appName("Spark read csv")
-    .getOrCreate
-  val filePath = "/home/josh/Downloads/个人征信/train/bill_detail_train.txt" //Current fold file
-  //读取csv的另一种方法
-  val billDF =spark.read
+    .getOrCreate()
+  def lossL2squaredGrad(i: Int, j: Int, prediction: Double, actual: Double): Double = {
+    prediction - actual
+  }
+  def lossL1Grad(i: Int, j: Int, prediction: Double, actual: Double): Double = {
+    // a subgradient of L1
+    math.signum(prediction - actual)
+  }
+  def mixedLossGrad(i: Int, j: Int, prediction: Double, actual: Double): Double = {
+    // weird loss function subgradient for demonstration
+    if (i + j % 2 == 0) lossL1Grad(i, j, prediction, actual) else lossL2squaredGrad(i, j, prediction, actual)
+  }
+  val userDF = UserCSVTest.userDF
+  val overdueDF = OverdueTest.overdueDF
+  val loanDF = LoanCSVTest.loanDF
+  val bankDF = BankCSVTest.bankDF
+  val billDF = BillCSVTest.billDF
+  val browseDF = BrowseCSVTest.browseDF
+  val DF1 = loanDF.join(userDF, "user_id")
+  val DF2 = overdueDF.join(DF1, "user_id")
+  DF2.show(5)
+  //按性别分组
+  //DF2.groupBy("gender").count().show()
+  DF2.groupBy("education").count().show()
+  //DF2.groupBy("tag").count().show()
+  val clearDF = DF2.filter("gender != 0").count()
+  billDF.show(5)
+//  val browse_miss = browseDF.filter("browse_time is null").count()
+//  print(browse_miss)
+
+  browseDF.createOrReplaceTempView("browse")
+  spark.sql("SELECT user_id FROM browse").show()
+  // Register the function to access it
+
+  spark.udf.register("myAverage", Average)
+
+  DF2.createOrReplaceTempView("user_table")
+
+  val result = spark.sql("SELECT myAverage(tag) as aver_tag FROM user_table")
+  result.show()
+//  DF2.select("user_id", "tag","education").write.format("csv").save("user_tag_edu.csv")
+  val groupByTagEdu =spark.sql("SELECT * FROM user_table GROUP By tag")
+
+
+  val testdata =spark.read
     .format("csv")
     .option("header", false)
     .option("inferSchema", "true")
-    .load(filePath).toDF("用户id","账单时间戳","银行id","上期账单金额","上期还款金额","信用卡余额","本期账单余额","本期账单最低还款额","消费笔数","本期账单金额","调整金额","循环利息","可用余额","预借现金额度","还款状态")
-  billDF.printSchema()
-
-  val filePath1 = "/home/josh/Downloads/个人征信/train/loan_time_train.txt"
-  val loanDF =spark.read
-    .format("csv")
-    .option("header", false)
-    .option("inferSchema", "true")
-    .load(filePath1).toDF("用户id","放款时间")
-  loanDF.printSchema()
-
-  //merge two dataFrame
-  //val df = billDF.join(loanDF,billDF.col("用户id") === loanDF.col("用户id")) //有两列用户id
-  val df = billDF.join(loanDF, Seq("用户id")) //只有一列用户id
-  df.printSchema()
-  df.show(5)
-  //将dataframe保存为csv格式
-  df.coalesce(1).write
-    .option("header", true)
-    .option("quote", "\u0000") //magic is happening here
-    .csv("tempfile1")
-  val rowNum = billDF.count()
-  billDF.count()
-  loanDF.count()
-  println(rowNum)
+    .load("user_tag_edu.csv").toDF("user_id","tag","education")
+  testdata.show()
 }

@@ -1,34 +1,19 @@
 package com.chinapex
 
-import org.apache.spark.sql.Row
+import org.apache.spark.sql.{DataFrame, Row}
 import org.apache.spark.sql.types._
 
 /**
   * Created by josh on 17-5-17.
   */
-object BankTest {
-  def main(args: Array[String]) {
+object BankTest extends App with MapStructHelper{
     val spark = org.apache.spark.sql.SparkSession.builder
       .master("local")
       .appName("bank information")
       .getOrCreate
-    val filePath = "/home/josh/Downloads/个人征信/train/bank_detail.txt" //Current fold file
+    val filePath = "/home/josh/Downloads/个人征信/train/bank_detail_train.txt" //Current fold file
     val bankRDD = spark.sparkContext.textFile(filePath)
     val schemaString = "用户id 时间戳 交易类型 交易金额 工资收入标记"
-//通过columnname转换StructField
-    def mapStructField(colName:String): StructField ={
-      if(colName == "用户id"){
-        StructField(colName, IntegerType, true)
-      }else if(colName == "时间戳"){
-        StructField(colName, LongType, true)
-      }else if(colName == "交易金额") {
-        StructField(colName, DoubleType, true)
-      }else if(colName == "工资收入标记"||colName == "性别"||colName == "交易类型"){
-        StructField(colName, BooleanType, true)
-      }else{
-        StructField(colName, StringType, true)
-      }
-    }
 
     val fields = schemaString.split(" ").map(mapStructField)
     val schema = StructType(fields)
@@ -39,7 +24,14 @@ object BankTest {
     // Apply the schema to the RDD
     val bankDF = spark.createDataFrame(rowRDD, schema)
     bankDF.printSchema()
-    //bankDF.show
-
+  var dfNew :DataFrame = bankDF
+  for( i <- 0 to 4){
+   // val newName = Array("user_id","time","transaction_type","transaction_money","income_tag")
+   val newName = Array("user","time","transaction","transaction","income")
+    dfNew = dfNew.withColumnRenamed(dfNew.columns(i),newName(i))
   }
+    //dfNew.show()
+  dfNew.printSchema()
+  //dfNew.show(5)
+
 }

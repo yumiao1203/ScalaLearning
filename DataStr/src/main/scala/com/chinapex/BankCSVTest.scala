@@ -13,10 +13,10 @@ object BankCSVTest extends App {
   val filePath = "file:///home/josh/Downloads/个人征信/train/bank_detail_train.txt" //Current fold file
   val spark = SparkSession.builder
     .master("local")
-    .appName("Spark read csv")
+    .appName("Spark read csv1")
     .getOrCreate
   val bankDF = spark.read
-    .format("com.databricks.spark.csv")
+    .format("csv")
     .option("inferSchema", "true")
     .option("header", "false")
     .load(filePath).toDF("用户id", "时间戳", "交易类型", "交易金额", "工资收入标记")

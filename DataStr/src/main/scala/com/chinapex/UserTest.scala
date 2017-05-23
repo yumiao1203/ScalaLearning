@@ -15,7 +15,7 @@ object UserTest extends App with MapStructHelper{
       .getOrCreate
     val filePath = "/home/josh/Downloads/个人征信/train/user_info_train.txt" //Current fold file
     val userRDD = spark.sparkContext.textFile(filePath)
-    //val schemaString = "用户id 性别 职业 教育程度 婚姻状态 户口类型" 中文show会出错
+    //val schemaString = "用户id 性别 职业 教育程度 婚姻状态 户口类型"
     val schemaString = "user_id gender occupation education marriage household_type"
 
     val fields = schemaString.split(" ").map(mapStructField)
