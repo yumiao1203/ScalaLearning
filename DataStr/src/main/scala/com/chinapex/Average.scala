@@ -9,6 +9,8 @@ import org.apache.spark.sql.types._
 import org.apache.spark.sql.Row
 import org.apache.spark.sql.SparkSession
 
+
+
 object Average extends UserDefinedAggregateFunction {
   // Data types of input arguments of this aggregate function
   def inputSchema: StructType = StructType(StructField("inputColumn", LongType) :: Nil)
