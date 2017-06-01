@@ -7,9 +7,6 @@ import org.apache.spark.sql.functions.udf
   * Created by josh on 17-5-18.
   */
 object BankCSVTest extends App {
-  // val sc = new SparkContext("local[3]","AppName")
-  //  val source = scala.io.Source.fromFile("/home/josh/Downloads/个人征信/train/user_info_train.txt")
-  //  val lines = try source.mkString finally source.close()
   val filePath = "file:///home/josh/Downloads/个人征信/train/bank_detail_train.txt" //Current fold file
   val spark = SparkSession.builder
     .master("local")

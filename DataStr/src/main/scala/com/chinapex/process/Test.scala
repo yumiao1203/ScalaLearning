@@ -3,11 +3,12 @@ package com.chinapex.process
 import org.apache.spark.sql.SparkSession
 import com.chinapex._
 
+
 /**
   * Created by josh on 17-5-18.
   */
-object Test extends App {
-
+class Test {}
+object Test {
   val spark = SparkSession
     .builder()
     .appName("Spark SQL basic example")
@@ -38,12 +39,10 @@ object Test extends App {
   DF2.groupBy("education").count().show()
   //DF2.groupBy("tag").count().show()
   val clearDF = DF2.filter("gender != 0").count()
-  billDF.show(5)
+  val colnames1 = DF2.columns
 //  val browse_miss = browseDF.filter("browse_time is null").count()
 //  print(browse_miss)
 
-  browseDF.createOrReplaceTempView("browse")
-  spark.sql("SELECT user_id FROM browse").show()
   // Register the function to access it
 
   spark.udf.register("myAverage", Average)
@@ -53,13 +52,17 @@ object Test extends App {
   val result = spark.sql("SELECT myAverage(tag) as aver_tag FROM user_table")
   result.show()
 //  DF2.select("user_id", "tag","education").write.format("csv").save("user_tag_edu.csv")
-  val groupByTagEdu =spark.sql("SELECT * FROM user_table GROUP By tag")
+//  val groupByEdu = spark.sql("SELECT * FROM user_table GROUP BY education")
+//  DF2.filter("tag == 1 and gender == 1").count()
+//  DF2.filter("tag == 1 and gender == 2").count()
+//  DF2.groupBy("gender").count().show()
+  DF2.show()
+//  DF2.write.format("csv").save("user_loan_overdue.csv")
+//  val testdata =spark.read
+//    .format("csv")
+//    .option("header", false)
+//    .option("inferSchema", "true")
+//    .load("user_tag_edu.csv").toDF("user_id","tag","education")
+//  testdata.show()
 
-
-  val testdata =spark.read
-    .format("csv")
-    .option("header", false)
-    .option("inferSchema", "true")
-    .load("user_tag_edu.csv").toDF("user_id","tag","education")
-  testdata.show()
 }

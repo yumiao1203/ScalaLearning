@@ -51,8 +51,8 @@ object Titanic extends App{
   dfNew1.collect()
 
   val sqlContext = new SQLContext(sc)
-  import org.apache.spark.sql.functions._
-  import sqlContext.implicits._ // for `when`
+  import org.apache.spark.sql.functions._ // for `when`
+  import sqlContext.implicits._ // for $
   //新列名取"sex"时会替代原来的"Sex"
   //val newData = df.withColumn("sex",when($"Sex" === "male",1).when($"Sex" === "female",0))
   val newData = df.withColumn("gender",when($"Sex" === "male",1).when($"Sex" === "female",0))
